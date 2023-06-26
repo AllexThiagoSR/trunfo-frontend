@@ -1,6 +1,20 @@
 import Head from "next/head"
+import { useEffect, useState } from "react"
+
+const { URL_PROTOCOL, URL_BASE } = process.env;
 
 export default function Home() {
+  const [message, setMessage] = useState({ message: '' });
+
+  const fetchInitialMessage = async () => {
+    const data = await fetch(URL_PROTOCOL + URL_BASE);
+    setMessage(await data.json());
+  };
+
+  useEffect(() => {
+    fetchInitialMessage();
+  }, []);
+  
   return (
     <>
       <Head>
@@ -10,7 +24,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        Cu
+        { message.message }
       </main>
     </>
   )
