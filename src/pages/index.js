@@ -1,5 +1,6 @@
 import Head from "next/head"
-import { useState } from "react"
+import Link from "next/link";
+import React, { useState } from "react"
 const URL_BASE = process.env.URL_BASE || 'http://localhost:3001';
 
 export default function Home() {
@@ -68,6 +69,9 @@ export default function Home() {
           {
             loginResponse.message
           }
+        </p>
+        <p>
+          Não tem um conta? <Link href="/sign-up">sign-up</Link>
         </p>
       </main>
     </>
