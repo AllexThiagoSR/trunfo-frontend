@@ -1,11 +1,13 @@
 import Head from "next/head"
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react"
 const URL_BASE = process.env.URL_BASE || 'http://localhost:3001';
 
 export default function Home() {
   const [{ email, password }, setFormInputs] = useState({ email: '', password: '' });
   const [loginResponse, setLoginResponse] = useState({ message: '' });
+  const router = useRouter();
 
   const handleChange = ({ target: { name, value }}) => {
     setFormInputs((state) => ({ ...state, [name]: value }));
@@ -38,7 +40,8 @@ export default function Home() {
               return undefined;
             }
             localStorage.setItem('token', data.token);
-            setLoginResponse({ message: '' });
+            router.push('/profile/self')
+            // setLoginResponse({ message: '' });
           } }
         >
           <label>
