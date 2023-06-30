@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 const URL_BASE = 'http://localhost:3001';
 
 function Deck() {
-  const [deck, setDeck] = useState({});
+  const [{ deck, canEdit }, setDeck] = useState({});
   const [loading, setLoading] = useState(true);
   const { query: { id }} = useRouter();
 
@@ -25,7 +25,7 @@ function Deck() {
   return (
     <>
       {
-        deck.message ? <p>{ deck.message }</p> : <DeckHeader { ...deck } />
+        deck.message ? <p>{ deck.message }</p> : <DeckHeader { ...deck } canEdit={ canEdit } />
       }
       <main>
         <Cards cards={ deck.cards }/>
