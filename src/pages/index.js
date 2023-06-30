@@ -2,7 +2,7 @@ import Head from "next/head"
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react"
-const URL_BASE = process.env.URL_BASE || 'http://localhost:3001';
+const URL_BASE = 'http://localhost:3001';
 
 export default function Home() {
   const [{ email, password }, setFormInputs] = useState({ email: '', password: '' });

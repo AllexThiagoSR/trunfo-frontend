@@ -2,7 +2,7 @@ import Loading from '@/components/Loading';
 import Profile from '@/components/Profile';
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
-const URL_BASE = process.env.URL_BASE || 'http://localhost:3001';
+const URL_BASE = 'http://localhost:3001';
 
 function Self() {
   const [response, setResponse] = useState();
