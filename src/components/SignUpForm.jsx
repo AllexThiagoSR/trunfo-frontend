@@ -1,14 +1,15 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+const URL_BASE = process.env.URL_BASE || 'http://localhost:3001';
 
 function SignUpForm() {
-  const [{ email, password, username, image, confirm }, setFormInputs] = useState({ 
-    email: '',
-    password: '',
-    username: '',
-    image: '',
-    confirm: '',
-  });
-
+  const router = useRouter();
+  const [
+    { email, password, username, image, confirm }, 
+    setFormInputs,
+  ] = useState({ email: '', password: '', username: '', image: '', confirm: '' });
+  const [responseMessage, setResponseMessage] = useState({ message: '' });
+  
   const handleChange = ({ target: { name, value } }) => {
     setFormInputs((state) => ({ ...state, [name]: value}));
   };
@@ -17,7 +18,27 @@ function SignUpForm() {
     <div>
       <form
         className="sign-up-form"
-        onSubmit={ (e) => { e.preventDefault() }}
+        onSubmit={ async (e) => {
+          e.preventDefault();
+          if (password !== confirm) {
+            setResponseMessage({ message: 'Passwords are different' })
+            return undefined;
+          }
+          const response = await fetch(URL_BASE + '/users', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json'
+            },
+            body: JSON.stringify({ email, password, username, image: image || undefined }),
+          });
+          const data = await response.json();
+          if (data.message) {
+            setResponseMessage(data);
+            return undefined;
+          }
+          router.push('/');
+        }}
       >
         <label>
           Username:
@@ -26,6 +47,7 @@ function SignUpForm() {
             name="username"
             value={ username }
             onChange={ handleChange }
+            required
           />  
         </label>
         <label>
@@ -44,6 +66,7 @@ function SignUpForm() {
             name="email"
             value={ email }
             onChange={ handleChange }
+            required
           />
         </label>
         <label>
@@ -53,6 +76,7 @@ function SignUpForm() {
             name="password"
             value={ password }
             onChange={ handleChange }
+            required
           />
         </label>
         <label>
@@ -62,11 +86,17 @@ function SignUpForm() {
             name="confirm"
             value={ confirm }
             onChange={ handleChange }
+            required
           />
         </label>
 
         <button>Send</button>
       </form>
+      <p>
+        {
+          responseMessage.message
+        }
+      </p>
       <img
         width={ 100 }
         height={ 100 }
