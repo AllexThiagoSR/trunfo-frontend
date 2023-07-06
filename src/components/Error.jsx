@@ -2,9 +2,9 @@ import React from 'react';
 
 function Error({ message }) {
   return (
-    <div>
+    <main>
       { message }
-    </div>
+    </main>
   );
 }
 
