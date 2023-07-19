@@ -1,0 +1,33 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+#profile-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#profile-container > * {
+  height: 100vh;
+}
+
+.profile-header {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0 0;
+}
+
+.profile-header p {
+  width: fit-content;
+}
+
+li {
+  list-style: none;
+}
+
+.profile-decks-container {
+  width: 65%;
+}
