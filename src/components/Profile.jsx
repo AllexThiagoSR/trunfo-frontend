@@ -13,7 +13,7 @@ function Profile({ username, image, email, decks }) {
         <p>{ username }</p>
         <p>{ email }</p>
         <nav>
-          <ul>
+          <ul className="nav-list">
             <li><Link href="/">Decks Page</Link></li>
             <li><Link href="/">Cards Page</Link></li>
             <li><Link href="/">Users Page</Link></li>

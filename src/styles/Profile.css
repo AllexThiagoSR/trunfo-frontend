@@ -25,6 +25,14 @@
   width: fit-content;
 }
 
+.profile-header img {
+  border-radius: 50%;
+}
+
+.profile-header > * {
+  margin: 10px;
+}
+
 li {
   list-style: none;
 }
@@ -46,4 +54,10 @@ li {
   border: 1px black solid;
   border-radius: 5px;
   padding: 10px;
+}
+
+.nav-list {
+  display: grid;
+  row-gap: 20px;
+  padding: 20px;
 }
