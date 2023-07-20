@@ -21,7 +21,7 @@ function Profile({ username, image, email, decks }) {
         </nav>
       </header>
       <main className="profile-decks-container">
-        <ProfileDecks decks={ decks }  />
+        <ProfileDecks decks={ [...decks, ...decks, ...decks, ...decks, ...decks] }  />
       </main>
     </div>
   );

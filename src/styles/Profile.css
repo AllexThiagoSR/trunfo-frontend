@@ -31,4 +31,19 @@ li {
 
 .profile-decks-container {
   width: 65%;
+  padding: 30px 20px;
+}
+
+.decks-list {
+  display: grid;
+  grid-template-columns: 90%;
+  row-gap: 20px;
+  overflow-y: scroll;
+  max-height: 100%;
+}
+
+.decks-list > li {
+  border: 1px black solid;
+  border-radius: 5px;
+  padding: 10px;
 }

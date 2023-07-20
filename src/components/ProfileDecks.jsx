@@ -3,13 +3,11 @@ import DeckCard from './DeckCard';
 
 function ProfileDecks({ decks }) {
   return (
-    <section>
-      <ul>
-        {
-          decks.map((deck) => (<li key={ deck.id } ><DeckCard { ...deck }/></li>))
-        }
-      </ul>
-    </section>
+    <ul className="decks-list">
+      {
+        decks.map((deck) => (<li key={ deck.id } ><DeckCard { ...deck }/></li>))
+      }
+    </ul>
   );
 }
 
