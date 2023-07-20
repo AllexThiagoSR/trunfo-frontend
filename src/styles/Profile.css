@@ -6,10 +6,11 @@
 #profile-container {
   display: flex;
   justify-content: space-evenly;
+  height: 100vh;
 }
 
 #profile-container > * {
-  height: 100vh;
+  height: 100%;
 }
 
 .profile-header {
