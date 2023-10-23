@@ -9,12 +9,12 @@ export default function Decks() {
     const token = localStorage.getItem('token');
     const response = await fetch(URL_BASE + '/decks', { headers: { Authorization: token } });
     setDecks(await response.json());
+    console.log('ALou')
   };
 
   useEffect(() => {
     fetchDecks();
   }, []);
-  console.log(decks);
 
   return (
     <div className="decks-container">
