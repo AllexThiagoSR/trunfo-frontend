@@ -14,14 +14,14 @@ function Profile({ username, image, email, decks }) {
         <p>{ email }</p>
         <nav>
           <ul className="nav-list">
-            <li><Link href="/">Decks Page</Link></li>
+            <li><Link href="/decks">Decks Page</Link></li>
             <li><Link href="/">Cards Page</Link></li>
             <li><Link href="/">Users Page</Link></li>
           </ul>
         </nav>
       </header>
       <main className="profile-decks-container">
-        <ProfileDecks decks={ [...decks, ...decks, ...decks, ...decks, ...decks] }  />
+        <ProfileDecks decks={ [...decks] }  />
       </main>
     </div>
   );
