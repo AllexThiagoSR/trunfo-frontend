@@ -9,11 +9,11 @@ ProfilesList.propTypes = {
 function ProfilesList({ profiles }) {
   return (
     <div>
-      <ul>
+      <ul className="list">
         {
           profiles ? profiles.map((profile) => (
             <li key={ `${profile.id}-deck`}>
-              <Link href={ `/profiles/${profile.id}` }>
+              <Link href={ `/profile/${profile.id}` }>
                 <div>
                   <p>{ profile.username }</p>
                   <img src={ profile.image } />

@@ -9,7 +9,6 @@ export default function Decks() {
     const token = localStorage.getItem('token');
     const response = await fetch(URL_BASE + '/decks', { headers: { Authorization: token } });
     setDecks(await response.json());
-    console.log('ALou')
   };
 
   useEffect(() => {
@@ -22,7 +21,7 @@ export default function Decks() {
         <nav>
           <ul className="nav-list">
             <li><Link href="/">Cards Page</Link></li>
-            <li><Link href="/">Users Page</Link></li>
+            <li><Link href="/profile">Users Page</Link></li>
           </ul>
         </nav>
       </header>

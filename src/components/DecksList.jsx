@@ -9,7 +9,7 @@ DecksList.propTypes = {
 function DecksList({ decks }) {
   return (
     <div>
-      <ul>
+      <ul className="list">
         {
           decks ? decks.map((deck) => (
             <li key={ `${deck.id}-deck`}>
