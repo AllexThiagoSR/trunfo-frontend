@@ -2,6 +2,7 @@ import Head from "next/head"
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react"
+import Cookies from "universal-cookie";
 const URL_BASE = 'http://localhost:3001';
 
 export default function Home() {
@@ -39,7 +40,9 @@ export default function Home() {
               setLoginResponse(data);
               return undefined;
             }
+            const cookies = new Cookies();
             localStorage.setItem('token', data.token);
+            cookies.set('token', data.token);
             router.push('/profile/self')
             // setLoginResponse({ message: '' });
           } }

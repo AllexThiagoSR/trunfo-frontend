@@ -1,44 +1,26 @@
-// User cookies para guardar o token de autenticação para usá-lo dentro da função getServerSideProps
+// Usar cookies para guardar o token de autenticação para usá-lo dentro da função getServerSideProps
 import Error from '@/components/Error';
-import Loading from '@/components/Loading';
 import Profile from '@/components/Profile';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import Cookies from 'universal-cookie';
 
-const BASE_URL = 'http://localhost:3001/users/'
+export async function getServerSideProps({ query, req }) {
+  const URL = `http://backend:3001/users/${query.id}`;
+  const cookies = new Cookies(req.headers.cookie);
+  const token = cookies.get('token');
 
-// export async function getServerSideProps(context) {
-//   return { props: { } }
-// }
-
-export default function ProfileID() {
-  const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(true);
-  const { query: { id } } = useRouter();
-  const fetchUser = async (id) => {
-    if (id) {
-      const token = localStorage.getItem('token');
-      const response = await fetch(
-        BASE_URL + id,
-        {
-          headers: {
-            Authorization: token,
-          }
-        }
-      );
-      setUser(await response.json());
-      setLoading(false);
+  const user = await fetch(
+    URL,
+    {
+      headers: {
+        Authorization: token
+      }
     }
-  };
+  );
+  return { props: { user: await user.json() } }
+}
 
-  useEffect(() => {
-    fetchUser(id);
-  }, [id]);
-
-  if (loading) return <Loading />;
-
-  console.log(user, id);
+export default function ProfileID({ user }) {
   return (
     <>
       <Head>
