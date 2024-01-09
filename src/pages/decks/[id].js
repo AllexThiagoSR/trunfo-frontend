@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 const URL_BASE = 'http://localhost:3001';
 
 function Deck() {
-  const [{ deck, canEdit }, setDeck] = useState({});
+  const [fetchedDeck, setDeck] = useState({});
   const [loading, setLoading] = useState(true);
   const { query: { id }} = useRouter();
 
@@ -18,18 +18,24 @@ function Deck() {
   };
 
   useEffect(() => {
-    if (id !== undefined )fetchDeckInfo();
+    if (id !== undefined ) fetchDeckInfo();
   }, [id]);
 
   if (loading) return <Loading />
+  const { deck, canEdit } = fetchedDeck;
   return (
     <>
       {
-        deck.message ? <p>{ deck.message }</p> : <DeckHeader { ...deck } canEdit={ canEdit } />
+        fetchedDeck.message ? <p>{ fetchedDeck.message }</p>
+        : (
+          <>
+            <DeckHeader { ...deck } canEdit={ canEdit } />
+            <main className="saved-cards-container">
+              <Cards cards={ deck.cards } attributesNames={[deck.attributeOne, deck.attributeTwo, deck.attributeThree]}/>
+            </main>
+          </>
+        )
       }
-      <main className="saved-cards-container">
-        <Cards cards={ deck.cards } attributesNames={[deck.attributeOne, deck.attributeTwo, deck.attributeThree]}/>
-      </main>
     </>
   );
 }
