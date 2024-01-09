@@ -1,0 +1,44 @@
+.filter-form {
+  border: 1px solid var(--page-font-color);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  padding: 20px 40px;
+}
+
+.filter-form div {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.saved-cards-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+.saved-cards-container ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  width: 80%;
+}
+
+.saved-cards-container li {
+  margin-bottom: 22px;
+}
+
+.card-button-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-button-container button {
+  margin-top: 10px;
+}

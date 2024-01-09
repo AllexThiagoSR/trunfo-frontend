@@ -8,8 +8,22 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .list {
   padding: 0 50px;
+}
+
+:root {
+  --page-background-color: #2D033B; /* Alternativas: #2D033B, #0F044C, #382933, #3F3B6C, #371B58, #1B0044 */
+  --page-font-color: #EEEEEE; /*  Alternativas: #E5B8F4, #EEEEEE, #A4B494, #A3C7D6, #7858A6, #D6C5F0  */
+  --card-background-color: #141E61;
+  /* Alternativas cor de fundo das cartas: #810CA8, #141E61, #3B5249, #624F82, #4C3575, #5727A3 */
+  /* Alternativas cor de fundo das cartas: #C147E9, #787A91, #519872, #9F73AB, #5B4B8A, #9153F4 */
+  /* Favoritas: #5B4B8A, #141E61, #3B5249, #624F82, #4C3575 */
 }

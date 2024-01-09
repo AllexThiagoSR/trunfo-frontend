@@ -27,8 +27,8 @@ function Deck() {
       {
         deck.message ? <p>{ deck.message }</p> : <DeckHeader { ...deck } canEdit={ canEdit } />
       }
-      <main>
-        <Cards cards={ deck.cards }/>
+      <main className="saved-cards-container">
+        <Cards cards={ deck.cards } attributesNames={[deck.attributeOne, deck.attributeTwo, deck.attributeThree]}/>
       </main>
     </>
   );
