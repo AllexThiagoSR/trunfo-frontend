@@ -8,6 +8,10 @@
   margin-bottom: 10px;
 }
 
+.deck-list-card:hover {
+  background-color: rgb(219, 219, 219);
+}
+
 .deck-list-card {
   padding: 15px;
   border-radius: 5px;
