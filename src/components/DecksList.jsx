@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import formatDate from '@/utils/formatDate';
 
 const PLACEHOLDER = `https://st3.depositphotos.com
 /6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg`;
@@ -26,8 +27,8 @@ function DecksList({ decks }) {
             >
               <div>
                 <p className="deck-name">{ deck.name }</p>
-                <p>Created: { deck.created }</p>
-                <p>Updated: { deck.updated }</p>
+                <p>Created: { formatDate(deck.created) }</p>
+                <p>Updated: { formatDate(deck.updated) }</p>
               </div>
               <div className="user-container">
                 <img className="user-image" src={ deck.user.image || PLACEHOLDER }/>
