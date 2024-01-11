@@ -1,0 +1,35 @@
+.deck-list-card a {
+  color: black;
+  text-decoration: none;
+}
+
+.deck-name {
+  font-weight: 800;
+}
+
+.deck-list-card {
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  width: 700px;
+  margin-bottom: 20px;
+}
+
+.user-image {
+  border: 1px solid black;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.user-container {
+  display: flex;
+  align-items: center;
+  width: 200px;
+}
+
+.user-container > p {
+  margin-left: 10px;
+}

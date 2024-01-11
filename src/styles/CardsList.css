@@ -23,10 +23,11 @@
 .saved-cards-container ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   list-style: none;
   padding: 0;
   width: 80%;
+  min-width: 350px;
 }
 
 .saved-cards-container li {

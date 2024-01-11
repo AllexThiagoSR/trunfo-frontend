@@ -1,5 +1,6 @@
 import DecksList from "@/components/DecksList";
 import Link from "next/link";
+import Head from "next/head";
 import React, { useEffect, useState } from "react";
 const URL_BASE = 'http://localhost:3001';
 
@@ -16,18 +17,26 @@ export default function Decks() {
   }, []);
 
   return (
-    <div className="decks-container">
-      <header className="decks-header">
-        <nav>
-          <ul className="nav-list">
-            <li><Link href="/">Cards Page</Link></li>
-            <li><Link href="/profile">Users Page</Link></li>
-          </ul>
-        </nav>
-      </header>
-      <main>
-        <DecksList {...decks} />
-      </main>
-    </div>
+    <>
+      <Head>
+        <title>{ `Decks` }</title>
+        <meta name="description" content="Your profile page" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <div className="decks-container">
+        <header className="decks-header">
+          <nav>
+            <ul className="nav-list">
+              <li><Link href="/">Cards Page</Link></li>
+              <li><Link href="/profile">Users Page</Link></li>
+            </ul>
+          </nav>
+        </header>
+        <main>
+          <DecksList {...decks} />
+        </main>
+      </div>
+    </>
   );
 }

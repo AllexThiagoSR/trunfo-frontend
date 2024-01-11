@@ -1,6 +1,7 @@
 import Cards from '@/components/Cards';
 import DeckHeader from '@/components/DeckHeader';
 import Loading from '@/components/Loading';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 const URL_BASE = 'http://localhost:3001';
@@ -29,6 +30,12 @@ function Deck() {
         fetchedDeck.message ? <p>{ fetchedDeck.message }</p>
         : (
           <>
+            <Head>
+              <title>{ `${deck.name} Deck` }</title>
+              <meta name="description" content="Your profile page" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <link rel="icon" href="/favicon.ico" />
+            </Head>
             <DeckHeader { ...deck } canEdit={ canEdit } />
             <main className="saved-cards-container">
               <Cards cards={ deck.cards } attributesNames={[deck.attributeOne, deck.attributeTwo, deck.attributeThree]}/>
