@@ -14,6 +14,7 @@ function SignUp() {
       <main className="sign-up-container">
         Sign-Up
         <SignUpForm/>
+        <p>Already has an account? <a href="/">log-in</a></p>
       </main>
     </>
   );

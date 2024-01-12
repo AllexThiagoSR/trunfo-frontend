@@ -14,7 +14,7 @@ export default function Cards() {
   }
 
   useEffect(() => {
-    fetchCards(1);
+    fetchCards();
   }, [page]);
 
   console.log(cards);

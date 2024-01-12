@@ -15,7 +15,7 @@ function Profile({ username, image, email, decks }) {
         <nav>
           <ul className="nav-list">
             <li><Link href="/decks">Decks Page</Link></li>
-            <li><Link href="/">Cards Page</Link></li>
+            <li><Link href="/cards">Cards Page</Link></li>
             <li><Link href="/profile">Users Page</Link></li>
           </ul>
         </nav>

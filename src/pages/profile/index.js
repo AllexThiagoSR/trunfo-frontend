@@ -20,7 +20,7 @@ export default function Profiles() {
       <header className="profiles-header">
         <nav>
           <ul className="nav-list">
-            <li><Link href="/">Cards Page</Link></li>
+            <li><Link href="/cards">Cards Page</Link></li>
             <li><Link href="/decks">Decks Page</Link></li>
           </ul>
         </nav>
