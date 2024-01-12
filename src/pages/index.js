@@ -22,7 +22,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <main className="login-container">
         <form
           className="login-form"
           onSubmit={ async (e) => {
@@ -48,23 +48,23 @@ export default function Home() {
           } }
         >
           <label>
-            Email:
             <input
               type="email"
               name="email"
               value={ email }
               className="email-input"
+              placeholder="Email"
               onChange={ handleChange }
               required
             />
           </label>
           <label>
-            Password:
             <input
               type="password"
               name="password"
               value={ password }
               className="password-input"
+              placeholder="Password"
               onChange={ handleChange }
               required
             />
@@ -77,7 +77,7 @@ export default function Home() {
           }
         </p>
         <p>
-          Não tem um conta? <Link href="/sign-up">sign-up</Link>
+          Não tem uma conta? <Link href="/sign-up">sign-up</Link>
         </p>
       </main>
     </>
