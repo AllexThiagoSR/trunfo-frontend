@@ -5,6 +5,7 @@ import '../styles/Cards.css'
 import '../styles/CardsList.css'
 import '../styles/DecksList.css'
 import '../styles/Login.css'
+import '../styles/SignUp.css'
 
 export default function App({ Component, pageProps }) {
   return <Component {...pageProps} />
