@@ -6,18 +6,48 @@
   height: 100vh;
 }
 
+.sign-up-container > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  width: 100%;
+}
+
 .sign-up-form {
-  margin: 10px 0;
+  margin: 10px 50px 10px 0;
   display: flex;
   flex-direction: column;
-  height: 60%;
+  height: 80%;
   border: 1px solid black;
   border-radius: 10px;
   padding: 30px 50px;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
-.sign-up-form > button {
+.sign-up-form > * {
+  width: 100%;
+  height: 10%;
+}
+
+.text-input {
+  width: 100%;
+  height: 100%;
+}
+
+.profile-image-container {
+  width: 30%;
+  height: 80%;
+  border-radius: 20px;
+  border: 1px solid black;
+  overflow: hidden;
+}
+
+ .profile-image-container img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   width: 100%;
 }

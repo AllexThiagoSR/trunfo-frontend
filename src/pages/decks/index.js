@@ -33,7 +33,7 @@ export default function Decks() {
             </ul>
           </nav>
         </header>
-        <main>
+        <main className="decks-main">
           <DecksList {...decks} />
         </main>
       </div>

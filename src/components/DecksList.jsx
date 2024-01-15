@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import formatDate from '@/utils/formatDate';
+import DeckCard from './DeckCard';
 
 const PLACEHOLDER = `https://st3.depositphotos.com
 /6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg`;
@@ -25,11 +26,7 @@ function DecksList({ decks }) {
               value={ deck.id }
               onClick={ () => router.push(`/decks/${deck.id}`) }
             >
-              <div>
-                <p className="deck-name">{ deck.name }</p>
-                <p>Created: { formatDate(deck.created) }</p>
-                <p>Updated: { formatDate(deck.updated) }</p>
-              </div>
+              <DeckCard {...deck}/>
               <div className="user-container">
                 <img className="user-image" src={ deck.user.image || PLACEHOLDER }/>
                 <p>{ deck.user.username }</p>

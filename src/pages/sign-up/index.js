@@ -12,7 +12,7 @@ function SignUp() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="sign-up-container">
-        Sign-Up
+        <h2>Sign-Up</h2>
         <SignUpForm/>
         <p>Already has an account? <a href="/">log-in</a></p>
       </main>

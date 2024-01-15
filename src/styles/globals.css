@@ -16,7 +16,9 @@ body {
 }
 
 .list {
-  padding: 0 50px;
+  padding: 0 0 0 50px;
+  overflow-x: scroll;
+  height: 100%;
 }
 
 :root {

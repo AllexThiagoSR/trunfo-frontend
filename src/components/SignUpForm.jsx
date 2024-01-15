@@ -15,7 +15,7 @@ function SignUpForm() {
   };
 
   return (
-    <>
+    <div>
       <form
         className="sign-up-form"
         onSubmit={ async (e) => {
@@ -46,6 +46,7 @@ function SignUpForm() {
             name="username"
             value={ username }
             placeholder="Username"
+            className="text-input"
             onChange={ handleChange }
             required
           />  
@@ -56,6 +57,7 @@ function SignUpForm() {
             name="image"
             value={ image }
             placeholder="Image Link"
+            className="text-input"
             onChange={ handleChange }
           />  
         </label>
@@ -64,6 +66,7 @@ function SignUpForm() {
             type="email"
             name="email"
             placeholder="Email"
+            className="text-input"
             value={ email }
             onChange={ handleChange }
             required
@@ -74,6 +77,7 @@ function SignUpForm() {
             type="password"
             name="password"
             placeholder="Password"
+            className="text-input"
             value={ password }
             onChange={ handleChange }
             required
@@ -84,6 +88,7 @@ function SignUpForm() {
             type="password"
             name="confirm"
             placeholder="Confirm Password"
+            className="text-input"
             value={ confirm }
             onChange={ handleChange }
             required
@@ -96,12 +101,15 @@ function SignUpForm() {
           responseMessage.message
         }
       </p>
-      <img
-        width={ 100 }
-        height={ 100 }
-        src={ image }
-      />
-    </>
+      <div className="profile-image-container">
+        <img
+          width={ 400 }
+          height={ 400 }
+          src={ image }
+          alt="Your profile image"
+        />
+      </div>
+    </div>
   );
 }
 
