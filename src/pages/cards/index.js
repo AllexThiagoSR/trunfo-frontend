@@ -1,11 +1,12 @@
 import CardsList from "@/components/CardsList";
+import CardsPageFilters from "@/components/CardsPageFilters";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 const URL_BASE = 'http://localhost:3001';
 
 export default function Cards() {
   const [cards, setCards] = useState([]);
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(1);
 
   const fetchCards = async(limit=10) => {
     const token = localStorage.getItem('token');
@@ -16,8 +17,6 @@ export default function Cards() {
   useEffect(() => {
     fetchCards();
   }, [page]);
-
-  console.log(cards);
 
   return (
     <div className="cards-container">
@@ -30,6 +29,7 @@ export default function Cards() {
         </nav>
       </header>
       <main>
+        <CardsPageFilters />
         <CardsList {...cards} />
         <div>
           {
