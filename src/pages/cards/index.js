@@ -8,9 +8,12 @@ export default function Cards() {
   const [cards, setCards] = useState([]);
   const [page, setPage] = useState(1);
 
-  const fetchCards = async(limit=10) => {
+  const fetchCards = async(q = '', rarity = '', isTrunfo = '', limit=10) => {
     const token = localStorage.getItem('token');
-    const response = await fetch(URL_BASE + `/cards?limit=${limit}&page=${page}`, { headers: { Authorization: token }});
+    const response = await fetch(
+      `${URL_BASE}/cards?limit=${limit}&page=${page}&q=${q}&rarity=${rarity}&isTrunfo=${isTrunfo}`,
+      { headers: { Authorization: token } },
+    );
     setCards(await response.json());
   }
 
@@ -29,7 +32,7 @@ export default function Cards() {
         </nav>
       </header>
       <main>
-        <CardsPageFilters />
+        <CardsPageFilters fetcher={ fetchCards } />
         <CardsList {...cards} />
         <div>
           {
