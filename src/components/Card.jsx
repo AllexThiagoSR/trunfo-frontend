@@ -14,7 +14,6 @@ function Card(props) {
     description,
     name,
     rarity,
-    id,
     attributesNames,
     isTrunfo,
   } = props;
