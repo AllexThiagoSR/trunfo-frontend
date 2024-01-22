@@ -3,7 +3,7 @@ import Card from './Card';
 
 function CardsList({ cards }) {
   return (
-    <div>
+    <div className="saved-cards-container">
       <ul>
       {
         cards ? cards.map((card) => (

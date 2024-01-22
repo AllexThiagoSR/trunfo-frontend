@@ -22,7 +22,7 @@ export default function Cards() {
   }, [page]);
 
   return (
-    <div className="cards-container">
+    <>
       <header className="cards-header">
         <nav>
           <ul className="nav-list">
@@ -44,6 +44,6 @@ export default function Cards() {
           }
         </div>
       </main>
-    </div>
+    </>
   );
 }

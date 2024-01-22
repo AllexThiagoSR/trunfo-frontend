@@ -1,16 +1,18 @@
-.filter-form {
-  border: 1px solid var(--page-font-color);
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 30px;
-  padding: 20px 40px;
+.filter-container {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 30px;
+  padding: 30px;
 }
 
-.filter-form div {
-  align-items: center;
+.filter-container div {
   display: flex;
-  justify-content: space-between;
-  width: 500px;
+  justify-content: space-around;
+}
+
+.filter-form {
+  display: flex;
+  margin-bottom: 30px;
 }
 
 .saved-cards-container {

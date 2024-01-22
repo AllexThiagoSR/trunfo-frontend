@@ -17,25 +17,23 @@ function CardsPageFilters({ fetcher }) {
   };
 
   return (
-    <section>
-      <form>
+    <section className="filter-container">
+      <form className="filter-form">
         <label htmlFor="q">
           <input type="text" name="q" onChange={ handleChange } />
         </label>
-        <label htmlFor="normal">
-          <input name="rarity" id="normal" type="radio" value={ 1 } onChange={ handleChange } /> Normal
-        </label>
-        <label htmlFor="rare">
-          <input name="rarity" id="rare" type="radio" value={ 2 } onChange={ handleChange } /> Rara
-        </label>
-        <label htmlFor="very-rare">
-          <input name="rarity" id="very-rare" type="radio" value={ 3 } onChange={ handleChange } /> Muito Rara
-        </label>
-        <label htmlFor="epic">
-          <input name="rarity" id="epic" type="radio" value={ 4 } onChange={ handleChange } /> Épica
-        </label>
-        <label htmlFor="legendary">
-          <input name="rarity" id="legendary" type="radio" value={ 5 } onChange={ handleChange } /> Lendária
+        <label htmlFor="rarity">
+          <select
+            onChange={ handleChange }
+            name='rarity'
+          >
+            <option value={ '' }>Todas</option>
+            <option name="rarity" id="normal"value={ 1 }>Normal</option>
+            <option name="rarity" id="rare" value={ 2 }>Rara</option>
+            <option name="rarity" id="very-rare" value={ 3 }>Muito Rara</option>
+            <option name="rarity" id="epic" value={ 4 }>Épica</option>
+            <option name="rarity" id="legendary" value={ 5 }>Lendária</option>
+          </select>
         </label>
         <label htmlFor="isTrunfo">
           <select
@@ -47,6 +45,8 @@ function CardsPageFilters({ fetcher }) {
             <option value={ 'false' }>Não Super Trunfos</option>
           </select>
         </label>
+      </form>
+      <div>
         <button
           type="reset"
           onClick={() => {
@@ -59,12 +59,13 @@ function CardsPageFilters({ fetcher }) {
           }}
         >Limpar</button>
         <button
+          form=''
           onClick={ (e) => {
             e.preventDefault();
             fetcher(form.q, form.rarity, form.isTrunfo);
           }}
         >Filtrar</button>
-      </form>
+      </div>
     </section>
   );
 }
