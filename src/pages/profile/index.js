@@ -22,6 +22,7 @@ export default function Profiles() {
           <ul className="nav-list">
             <li><Link href="/cards">Cards Page</Link></li>
             <li><Link href="/decks">Decks Page</Link></li>
+            <li><Link href="/profile/self" >Your Profile</Link></li>
           </ul>
         </nav>
       </header>

@@ -28,6 +28,7 @@ export default function Cards() {
           <ul className="nav-list">
             <li><Link href="/decks">Decks Page</Link></li>
             <li><Link href="/profile">Users Page</Link></li>
+            <li><Link href="/profile/self" >Your Profile</Link></li>
           </ul>
         </nav>
       </header>

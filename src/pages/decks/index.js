@@ -30,6 +30,7 @@ export default function Decks() {
             <ul className="nav-list">
               <li><Link href="/cards">Cards Page</Link></li>
               <li><Link href="/profile">Users Page</Link></li>
+              <li><Link href="/profile/self" >Your Profile</Link></li>
             </ul>
           </nav>
         </header>
