@@ -1,3 +1,4 @@
+import CardCreationForm from '@/components/CardCreationForm';
 import Cards from '@/components/Cards';
 import DeckHeader from '@/components/DeckHeader';
 import Loading from '@/components/Loading';
@@ -9,6 +10,7 @@ const URL_BASE = 'http://localhost:3001';
 function Deck() {
   const [fetchedDeck, setDeck] = useState({});
   const [loading, setLoading] = useState(true);
+  const [creatingCard, setCreating] = useState(false);
   const { query: { id }} = useRouter();
 
   const fetchDeckInfo = async () => {
@@ -38,7 +40,20 @@ function Deck() {
             </Head>
             <DeckHeader { ...deck } canEdit={ canEdit } />
             <main className="saved-cards-container">
-              <Cards cards={ deck.cards } attributesNames={[deck.attributeOne, deck.attributeTwo, deck.attributeThree]}/>
+              <Cards
+                cards={ deck.cards }
+                attributesNames={ [deck.attributeOne, deck.attributeTwo, deck.attributeThree] }
+              />
+              <button onClick={ () => setCreating(true) }>Adicionar carta</button>
+              {
+                creatingCard && (
+                  <CardCreationForm
+                    attributesNames={ [deck.attributeOne, deck.attributeTwo, deck.attributeThree] }
+                    closeFunc={ () => setCreating(false) }
+                    deckId={ id }
+                  />
+                )
+              }
             </main>
           </>
         )
