@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Card from './Card';
 
-function CardCreationForm({ attributesNames, closeFunc, deckId }) {
+function CardCreationForm({ attributesNames, closeFunc, deckId, saveCardInLocal }) {
   const [card, setCard] = useState({
     name: '',
     description: '',
@@ -16,24 +16,14 @@ function CardCreationForm({ attributesNames, closeFunc, deckId }) {
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
-    const rarities = [
-      'Normal',
-      'Rara',
-      'Muito Rara',
-      'Épica',
-      'Lendária',
-    ];
+    const rarities = ['Normal', 'Rara', 'Muito Rara', 'Épica', 'Lendária'];
     const name = e.target.name;
     let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
     value = e.target.type === 'number' ? parseInt(value) : value;
 
     if (name === 'rarity') {
       const rarityId = parseInt(value);
-      setCard({
-        ...card,
-        rarityId,
-        rarity: { name: rarities[rarityId - 1] },
-      });
+      setCard({ ...card, rarityId, rarity: { name: rarities[rarityId - 1] } });
       return;
     }
     setCard({ ...card, [name]: value });
@@ -64,7 +54,8 @@ function CardCreationForm({ attributesNames, closeFunc, deckId }) {
     );
 
     const result = await response.json();
-    if (result.message) setError(result.message);
+    if (result.message) return setError(result.message);
+    saveCardInLocal(card);
   };
 
   return (
@@ -127,7 +118,12 @@ function CardCreationForm({ attributesNames, closeFunc, deckId }) {
         />
       </div>
       <button onClick={ closeFunc }>Cancelar</button>
-      <button onClick={ saveCard }>Salvar</button>
+      <button
+        onClick={() => {
+          saveCard();
+          closeFunc();
+        }}
+      >Salvar</button>
       <p>{error}</p>
     </section>
   );

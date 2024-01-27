@@ -9,8 +9,8 @@ const URL_BASE = 'http://localhost:3001';
 
 function Deck() {
   const [fetchedDeck, setDeck] = useState({});
-  const [loading, setLoading] = useState(true);
   const [creatingCard, setCreating] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { query: { id }} = useRouter();
 
   const fetchDeckInfo = async () => {
@@ -20,12 +20,19 @@ function Deck() {
     setLoading(false);
   };
 
+  const { deck, canEdit } = fetchedDeck;
+
+  const saveCardInDeckLocal = (card) => {
+    console.log(card);
+    setDeck({ canEdit, deck: { ...deck, cards: [...deck.cards, card] } });
+  };
+
   useEffect(() => {
     if (id !== undefined ) fetchDeckInfo();
   }, [id]);
 
-  if (loading) return <Loading />
-  const { deck, canEdit } = fetchedDeck;
+  if (loading) return <Loading />;
+
   return (
     <>
       {
@@ -44,13 +51,18 @@ function Deck() {
                 cards={ deck.cards }
                 attributesNames={ [deck.attributeOne, deck.attributeTwo, deck.attributeThree] }
               />
-              <button onClick={ () => setCreating(true) }>Adicionar carta</button>
+              {
+                canEdit
+                && deck.cards.length <= 32
+                && <button onClick={ () => setCreating(true) }>Adicionar carta</button>
+              }
               {
                 creatingCard && (
                   <CardCreationForm
                     attributesNames={ [deck.attributeOne, deck.attributeTwo, deck.attributeThree] }
                     closeFunc={ () => setCreating(false) }
                     deckId={ id }
+                    saveCardInLocal={ saveCardInDeckLocal }
                   />
                 )
               }
