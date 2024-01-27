@@ -116,14 +116,15 @@ function CardCreationForm({ attributesNames, closeFunc, deckId, saveCardInLocal 
           { ...card }
           attributesNames={ attributesNames }
         />
+        <button onClick={ closeFunc }>Cancelar</button>
+        <button
+          onClick={() => {
+            saveCard();
+            closeFunc();
+          }}
+        >Salvar</button>
       </div>
-      <button onClick={ closeFunc }>Cancelar</button>
-      <button
-        onClick={() => {
-          saveCard();
-          closeFunc();
-        }}
-      >Salvar</button>
+      
       <p>{error}</p>
     </section>
   );

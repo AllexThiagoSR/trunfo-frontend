@@ -23,7 +23,6 @@ function Deck() {
   const { deck, canEdit } = fetchedDeck;
 
   const saveCardInDeckLocal = (card) => {
-    console.log(card);
     setDeck({ canEdit, deck: { ...deck, cards: [...deck.cards, card] } });
   };
 
@@ -58,12 +57,14 @@ function Deck() {
               }
               {
                 creatingCard && (
-                  <CardCreationForm
-                    attributesNames={ [deck.attributeOne, deck.attributeTwo, deck.attributeThree] }
-                    closeFunc={ () => setCreating(false) }
-                    deckId={ id }
-                    saveCardInLocal={ saveCardInDeckLocal }
-                  />
+                  <div className="creation-container">
+                    <CardCreationForm
+                      attributesNames={ [deck.attributeOne, deck.attributeTwo, deck.attributeThree] }
+                      closeFunc={ () => setCreating(false) }
+                      deckId={ id }
+                      saveCardInLocal={ saveCardInDeckLocal }
+                    />
+                  </div>
                 )
               }
             </main>
