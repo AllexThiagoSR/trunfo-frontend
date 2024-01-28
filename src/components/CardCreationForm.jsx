@@ -56,76 +56,82 @@ function CardCreationForm({ attributesNames, closeFunc, deckId, saveCardInLocal 
     const result = await response.json();
     if (result.message) return setError(result.message);
     saveCardInLocal(card);
+    closeFunc();
   };
 
   return (
     <section>
-      <form>
-        <label>
-          <input name="name" value={ card.name } onChange={ handleChange } />
-        </label>
-        <label>
-          <textarea name="description" value={ card.description } onChange={ handleChange } />
-        </label>
-        <label>
-          <input name="image" value={ card.image } onChange={ handleChange } />
-        </label>
-        <label>
-          <select name="rarity" value={ card.rarityId } defaultValue={ 1 } onChange={ handleChange }>
-            <option id="normal"value={ 1 }>Normal</option>
-            <option id="rare" value={ 2 }>Rara</option>
-            <option id="very-rare" value={ 3 }>Muito Rara</option>
-            <option id="epic" value={ 4 }>Épica</option>
-            <option id="legendary" value={ 5 }>Lendária</option>
-          </select>
-        </label>
-        <label>
-          <input type="checkbox" name="isTrunfo" checked={ card.isTrunfo } onChange={ handleChange } />Trunfo
-        </label>
-        <label>
-          { attributesNames[0] }:
-          <input
-            type="number"
-            name="attributeOne"
-            value={ card.attributeOne }
-            onChange={ handleChange }
-          />
-        </label>
-        <label>
-          { attributesNames[1] }:
-          <input
-            type="number"
-            name="attributeTwo"
-            value={ card.attributeTwo }
-            onChange={ handleChange }
-          />
-        </label>
-        <label>
-          { attributesNames[2] }:
-          <input
-            type="number"
-            name="attributeThree"
-            value={ card.attributeThree }
-            onChange={ handleChange }
-          />
-        </label>
-      </form>
+      <div className="form-container">
+        <form className="card-form">
+          <label>
+            <input className="text-input" name="name" value={ card.name } onChange={ handleChange } placeholder="Name" />
+          </label>
+          <label>
+            <input className="text-input" name="image" value={ card.image } onChange={ handleChange } placeholder="Image" />
+          </label>
+          <label>
+            <textarea placeholder="Description" className="text-input" name="description" value={ card.description } onChange={ handleChange } />
+          </label>
+          <label className="attribute-label">
+            { attributesNames[0] }:
+            <input
+              type="number"
+              name="attributeOne"
+              className="attribute-input"
+              value={ card.attributeOne }
+              onChange={ handleChange }
+            />
+          </label>
+          <label className="attribute-label">
+            { attributesNames[1] }:
+            <input
+              type="number"
+              name="attributeTwo"
+              className="attribute-input"
+              value={ card.attributeTwo }
+              onChange={ handleChange }
+            />
+          </label>
+          <label className="attribute-label">
+            { attributesNames[2] }:
+            <input
+              type="number"
+              name="attributeThree"
+              className="attribute-input"
+              value={ card.attributeThree }
+              onChange={ handleChange }
+            />
+          </label>
+          <label>
+            <select name="rarity" value={ card.rarityId } defaultValue={ 1 } onChange={ handleChange }>
+              <option id="normal"value={ 1 }>Normal</option>
+              <option id="rare" value={ 2 }>Rara</option>
+              <option id="very-rare" value={ 3 }>Muito Rara</option>
+              <option id="epic" value={ 4 }>Épica</option>
+              <option id="legendary" value={ 5 }>Lendária</option>
+            </select>
+          </label>
+          <label>
+            <input type="checkbox" name="isTrunfo" checked={ card.isTrunfo } onChange={ handleChange } />Trunfo
+          </label>
+          <div className="label-buttons">
+            <button type="button" onClick={ closeFunc }>Cancelar</button>
+            <button
+              type="button"
+              onClick={ async () => {
+                await saveCard();
+              } }
+            >Salvar</button>
+          </div>
+        </form>
+        { error && <p>{error}</p>}
+      </div>
       <div>
-        <h2>Preview</h2>
         <Card
           { ...card }
           attributesNames={ attributesNames }
         />
-        <button onClick={ closeFunc }>Cancelar</button>
-        <button
-          onClick={() => {
-            saveCard();
-            closeFunc();
-          }}
-        >Salvar</button>
       </div>
-      
-      <p>{error}</p>
     </section>
   );
 }
