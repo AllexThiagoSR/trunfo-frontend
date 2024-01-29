@@ -22,6 +22,7 @@ function Profile({ username, image, email, decks }) {
       </header>
       <main className="profile-decks-container">
         <ProfileDecks decks={ [...decks] }  />
+        <button>Criar deck</button>
       </main>
     </div>
   );
