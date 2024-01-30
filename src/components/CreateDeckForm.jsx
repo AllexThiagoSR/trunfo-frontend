@@ -1,22 +1,21 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
-function Create() {
+function CreateDeckForm({ setCreatedDecks, closeFunc }) {
   const [deck, setDeck] = useState({
     name: '',
-    attributeOne: '',
-    attributeTwo: '',
-    attributeThree: '',
   });
+  const [error, setError] = useState('');
 
-  const router = useRouter();
-
-  const handleChange = ({ target: { name, value } }) => { setDeck({ ...deck, [name]: value }); };
+  const handleChange = ({ target: { name, value } }) => {
+    const newValue = name.includes('attr') && !value ? undefined : value;
+    setDeck({ ...deck, [name]: newValue });
+  };
 
   const send = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    await fetch(
+    const response = await fetch(
       'http://localhost:3001/decks',
       {
         method: 'POST',
@@ -28,7 +27,13 @@ function Create() {
         body: JSON.stringify(deck),
       }
     );
-    router.push('/profile/self');
+    const createdDeck = await response.json();
+    if (createdDeck.message) return setError(createdDeck.message); 
+    setCreatedDecks((decks) => {
+      console.log(decks);
+      return [...decks, createdDeck];
+    });
+    closeFunc();
   };
 
   return (
@@ -48,8 +53,11 @@ function Create() {
         </label>
         <button>Criar</button>
       </form>
+      {
+        error && <p>{ error }</p>
+      }
     </div>
   );
 }
 
-export default Create;
+export default CreateDeckForm;

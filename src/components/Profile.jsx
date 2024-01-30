@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProfileDecks from './ProfileDecks';
 import Link from 'next/link';
+import CreateDeckForm from './CreateDeckForm';
 
 const PLACEHOLDER = `https://st3.depositphotos.com
 /6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg`;
 
 function Profile({ username, image, email, decks }) {
+  const [createdDecks, setCreatedDecks] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+
   return (
     <div id="profile-container">
       <header className="profile-header">
@@ -21,8 +25,14 @@ function Profile({ username, image, email, decks }) {
         </nav>
       </header>
       <main className="profile-decks-container">
-        <ProfileDecks decks={ [...decks] }  />
-        <button>Criar deck</button>
+        <ProfileDecks decks={ [...decks, ...createdDecks] }  />
+        <button onClick={ () => setShowForm(!showForm) } >
+          { showForm ? 'Fechar' : 'Criar deck' }
+        </button>
+        {
+          showForm &&
+            <CreateDeckForm setCreatedDecks={ setCreatedDecks } closeFunc={ () => setShowForm(false) } />
+        }
       </main>
     </div>
   );

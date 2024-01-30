@@ -2,10 +2,13 @@ import DecksList from "@/components/DecksList";
 import Link from "next/link";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
+import CreateDeckForm from "@/components/CreateDeckForm";
 const URL_BASE = 'http://localhost:3001';
 
 export default function Decks() {
-  const [decks, setDecks] = useState();
+  const [decks, setDecks] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+
   const fetchDecks = async () => {
     const token = localStorage.getItem('token');
     const response = await fetch(URL_BASE + '/decks', { headers: { Authorization: token } });
@@ -35,7 +38,14 @@ export default function Decks() {
           </nav>
         </header>
         <main className="decks-main">
-          <DecksList {...decks} />
+          <DecksList decks={ decks} />
+          <button onClick={ () => setShowForm(!showForm) } >
+            { showForm ? 'Fechar' : 'Criar deck' }
+          </button>
+          {
+            showForm &&
+              <CreateDeckForm closeFunc={ () => setShowForm(false) } setCreatedDecks={ setDecks } />
+          }
         </main>
       </div>
     </>
