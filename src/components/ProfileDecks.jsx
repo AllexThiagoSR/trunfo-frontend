@@ -8,7 +8,7 @@ function ProfileDecks({ decks }) {
     <ul className="list decks-list">
       {
         decks.map((deck) => (
-         <li  className="deck-list-card" key={ deck.id } onClick={ () => router.push(`/decks/${deck.id}`) } >
+         <li  className="deck-list-card" key={ `${deck.id}-deck` } onClick={ () => router.push(`/decks/${deck.id}`) } >
             <DeckCard { ...deck }/>
           </li>
         ))

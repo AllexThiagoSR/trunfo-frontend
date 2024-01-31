@@ -1,36 +1,32 @@
 import CardCreationForm from '@/components/CardCreationForm';
 import Cards from '@/components/Cards';
 import DeckHeader from '@/components/DeckHeader';
-import Loading from '@/components/Loading';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-const URL_BASE = 'http://localhost:3001';
+import React, { useState } from 'react';
+import Cookies from 'universal-cookie';
 
-function Deck() {
-  const [fetchedDeck, setDeck] = useState({});
+const URL_BASE = 'http://backend:3001';
+
+export async function getServerSideProps({ query, req }) {
+  const URL = `${URL_BASE}/decks/${query.id}`;
+  const cookies = new Cookies(req.headers.cookie);
+  const token = cookies.get('token');
+  const response = await fetch(URL, { headers: { Authorization: token }});
+  const result = await response.json();
+  return { props: { serverSideDeck: result } }
+}
+
+function Deck({ serverSideDeck }) {
+  const [fetchedDeck, setDeck] = useState(serverSideDeck);
   const [creatingCard, setCreating] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const { query: { id }} = useRouter();
-
-  const fetchDeckInfo = async () => {
-    const token = localStorage.getItem('token');
-    const response = await fetch(URL_BASE + `/decks/${id}`, { headers: { Authorization: token }});
-    setDeck(await response.json());
-    setLoading(false);
-  };
 
   const { deck, canEdit } = fetchedDeck;
+
+  console.log(fetchedDeck)
 
   const saveCardInDeckLocal = (card) => {
     setDeck({ canEdit, deck: { ...deck, cards: [...deck.cards, card] } });
   };
-
-  useEffect(() => {
-    if (id !== undefined ) fetchDeckInfo();
-  }, [id]);
-
-  if (loading) return <Loading />;
 
   return (
     <>
@@ -40,7 +36,7 @@ function Deck() {
           <>
             <Head>
               <title>{ `${deck.name} Deck` }</title>
-              <meta name="description" content="Your profile page" />
+              <meta name="description" content="Page of one deck" />
               <meta name="viewport" content="width=device-width, initial-scale=1" />
               <link rel="icon" href="/favicon.ico" />
             </Head>
@@ -61,7 +57,7 @@ function Deck() {
                     <CardCreationForm
                       attributesNames={ [deck.attributeOne, deck.attributeTwo, deck.attributeThree] }
                       closeFunc={ () => setCreating(false) }
-                      deckId={ id }
+                      deckId={ deck.id }
                       saveCardInLocal={ saveCardInDeckLocal }
                     />
                   </div>

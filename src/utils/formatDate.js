@@ -1,6 +1,5 @@
 const formatDate = (date) => {
-  const withoutTime = date.split('T')[0];
-  const newDate = new Date(withoutTime);
+  const newDate = new Date(date);
   return newDate.toDateString();
 };
 

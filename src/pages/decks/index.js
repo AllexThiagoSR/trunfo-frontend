@@ -3,22 +3,22 @@ import Link from "next/link";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import CreateDeckForm from "@/components/CreateDeckForm";
-const URL_BASE = 'http://localhost:3001';
+import Cookies from "universal-cookie";
+const URL_BASE = 'http://backend:3001';
 
-export default function Decks() {
-  const [decks, setDecks] = useState([]);
+export async function getServerSideProps({ req }) {
+  const URL = `${URL_BASE}/decks`;
+  const cookies = new Cookies(req.headers.cookie);
+  const token = cookies.get('token');
+  const response = await fetch(URL, { headers: { Authorization: token }});
+  const result = await response.json();
+  return { props: { serverSideDecks: result } }
+}
+
+export default function Decks({ serverSideDecks }) {
+  const [decks, setDecks] = useState(serverSideDecks);
   const [showForm, setShowForm] = useState(false);
-
-  const fetchDecks = async () => {
-    const token = localStorage.getItem('token');
-    const response = await fetch(URL_BASE + '/decks', { headers: { Authorization: token } });
-    setDecks(await response.json());
-  };
-
-  useEffect(() => {
-    fetchDecks();
-  }, []);
-
+  
   return (
     <>
       <Head>

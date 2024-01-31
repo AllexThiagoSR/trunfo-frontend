@@ -42,9 +42,8 @@ export default function Home() {
             }
             const cookies = new Cookies();
             localStorage.setItem('token', data.token);
-            cookies.set('token', data.token);
+            cookies.set('token', data.token, { secure: true, sameSite: 'strict' });
             router.push('/profile/self')
-            // setLoginResponse({ message: '' });
           } }
         >
           <label>

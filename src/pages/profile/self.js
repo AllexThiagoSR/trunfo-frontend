@@ -1,30 +1,22 @@
 import Error from '@/components/Error';
-import Loading from '@/components/Loading';
 import Profile from '@/components/Profile';
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
-const URL_BASE = 'http://localhost:3001';
+import Cookies from 'universal-cookie';
+const URL_BASE = 'http://backend:3001';
 
-function Self() {
-  const [response, setResponse] = useState({});
-  const [loading, setLoading] = useState(true);
+export async function getServerSideProps({ req }) {
+  const cookies = new Cookies(req.headers.cookie);
+  const token = cookies.get('token');
+  const response = await fetch(URL_BASE + '/users/logged', {
+    headers: {
+      Authorization: token,
+    }
+  });
+  return { props: { profile: await response.json() } };
+}
 
-  const getLoggedUser = async () => {
-    const token = localStorage.getItem('token');
-    const loggedUser = await fetch(URL_BASE + '/users/logged', {
-      headers: {
-        Authorization: token,
-      }
-    });
-    setResponse(await loggedUser.json())
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    getLoggedUser();
-  }, []);
-
-  if (loading) return <Loading />;
+function Self({ profile }) {
   return (
     <>
       <Head>
@@ -34,8 +26,8 @@ function Self() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {
-        response.message
-          ? <Error message={ response.message } /> : <Profile { ...response } />
+        profile.message
+          ? <Error message={ profile.message } /> : <Profile { ...profile } />
       }
     </>
   );

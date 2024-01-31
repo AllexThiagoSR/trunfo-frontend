@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 // import PropTypes from 'prop-types';
 
@@ -20,33 +21,38 @@ function Card(props) {
   return (
     <div className="card">
       <div className="img-container">
-        <img
+        {/* <img
           src={ image }
           alt={ name }
-          data-testid="image-card"
+        /> */}
+        <Image
+          src={ image }
+          alt={ name }
+          width={ 500 }
+          height={ 500 }
         />
       </div>
       <div className="info-container">
-        <h2 data-testid="name-card" className="card-name">{ name }</h2>
-        <p data-testid="description-card" className="desc-card">{ description }</p>
+        <h2 className="card-name">{ name }</h2>
+        <p className="desc-card">{ description }</p>
         <div className="attribute-container">
-          <p data-testid="attr1-crd">
+          <p>
             { `${attributesNames[0]}: ${attributeOne}` }
           </p>
-          <p data-testid="attr2-card">
+          <p>
             { `${attributesNames[1]}: ${attributeTwo}` }
           </p>
-          <p data-testid="attr3-card">
+          <p>
             { `${attributesNames[2]}: ${attributeThree}` }
           </p>
         </div>
         <div className="trunfo">
           {
             isTrunfo ? (
-              <p data-testid="trunfo-card" className="trunfo-text">Super Trunfo</p>
+              <p className="trunfo-text">Super Trunfo</p>
             ) : ''
           }
-          <p data-testid="rare-card">{ `Raridade: ${rarity.name}` }</p>
+          <p>{ `Raridade: ${rarity.name}` }</p>
         </div>
       </div>
     </div>

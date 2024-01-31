@@ -1,20 +1,18 @@
 import ProfilesList from "@/components/ProfilesList";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-const URL_BASE = 'http://localhost:3001';
+import Cookies from "universal-cookie";
+const URL_BASE = 'http://backend:3001';
 
-export default function Profiles() {
-  const [profiles, setProfiles] = useState();
-  const fetchUsers = async () => {
-    const token = localStorage.getItem('token');
-    const response = await fetch(URL_BASE + '/users', { headers: { Authorization: token } });
-    setProfiles(await response.json());
-  };
+export async function getServerSideProps({ req }) {
+  const URL = `${URL_BASE}/users`;
+  const cookies = new Cookies(req.headers.cookie);
+  const token = cookies.get('token');
+  const response = await fetch(URL, { headers: { Authorization: token } });
+  return { props: { profiles: await response.json() } };
+}
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
+export default function Profiles({ profiles }) {
   return (
     <div className="profiles-container">
       <header className="profiles-header">

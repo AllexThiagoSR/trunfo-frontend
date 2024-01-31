@@ -12,7 +12,7 @@ function ProfilesList({ profiles }) {
       <ul className="list">
         {
           profiles ? profiles.map((profile) => (
-            <li key={ `${profile.id}-deck`}>
+            <li key={ `${profile.id}-profile`}>
               <Link href={ `/profile/${profile.id}` }>
                 <div>
                   <p>{ profile.username }</p>
