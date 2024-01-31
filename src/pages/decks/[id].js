@@ -22,8 +22,6 @@ function Deck({ serverSideDeck }) {
 
   const { deck, canEdit } = fetchedDeck;
 
-  console.log(fetchedDeck)
-
   const saveCardInDeckLocal = (card) => {
     setDeck({ canEdit, deck: { ...deck, cards: [...deck.cards, card] } });
   };
