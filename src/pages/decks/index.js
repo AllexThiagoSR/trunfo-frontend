@@ -4,7 +4,7 @@ import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import CreateDeckForm from "@/components/CreateDeckForm";
 import Cookies from "universal-cookie";
-const URL_BASE = 'http://backend:3001';
+const URL_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 export async function getServerSideProps({ req }) {
   const URL = `${URL_BASE}/decks`;

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-const URL_BASE = 'http://localhost:3001';
+const URL_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 function SignUpForm() {
   const router = useRouter();

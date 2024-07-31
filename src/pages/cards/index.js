@@ -2,7 +2,7 @@ import CardsList from "@/components/CardsList";
 import CardsPageFilters from "@/components/CardsPageFilters";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-const URL_BASE = 'http://localhost:3001';
+const URL_BASE = process.env.process.env.NEXT_PUBLIC_API_URL;
 
 export default function Cards() {
   const [cards, setCards] = useState([]);

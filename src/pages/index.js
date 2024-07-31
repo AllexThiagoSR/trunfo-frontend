@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react"
 import Cookies from "universal-cookie";
-const URL_BASE = 'http://localhost:3001';
+const URL_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Home() {
   const [{ email, password }, setFormInputs] = useState({ email: '', password: '' });
