@@ -21,12 +21,8 @@ function Card(props) {
   return (
     <div className="card">
       <div className="img-container">
-        {/* <img
-          src={ image }
-          alt={ name }
-        /> */}
         <Image
-          src={ image }
+          src={ image || '' }
           alt={ name }
           width={ 500 }
           height={ 500 }

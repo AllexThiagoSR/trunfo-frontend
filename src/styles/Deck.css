@@ -67,3 +67,8 @@
 .label-buttons > button {
   width: 70px;
 }
+
+.deck-header {
+  display: flex;
+  justify-content: space-between;
+}

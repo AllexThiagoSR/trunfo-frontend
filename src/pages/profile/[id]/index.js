@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Cookies from 'universal-cookie';
 
 export async function getServerSideProps({ query, req }) {
-  const URL = `http://backend:3001/users/${query.id}`;
+  const URL = `${process.env.NEXT_PUBLIC_API_URL}/users/${query.id}`;
   const cookies = new Cookies(req.headers.cookie);
   const token = cookies.get('token');
 
