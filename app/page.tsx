@@ -3,6 +3,7 @@
 import { login } from "@/services/api";
 import { Button } from "@heroui/button";
 import { Input } from "@heroui/input";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 
@@ -53,7 +54,10 @@ export default function Home() {
           />
           <p className="h-[24px]">{errorMessage}</p>
         </div>
-        <Button onPress={ onLoginClick } type="button" className="w-full" color="primary">Login</Button>
+        <div className="flex flex-col items-center w-full gap-2">
+          <Button isDisabled={!email || !password} onPress={ onLoginClick } type="button" className="w-full" color="primary">Login</Button>
+          <p>Don't have an accoun? <Link href={'/sign-up'} className="underline text-sky-600">Sign Up</Link></p>
+        </div>
       </form>
     </section>
   );

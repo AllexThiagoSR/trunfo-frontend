@@ -20,3 +20,20 @@ export const login = async (email: string, password: string) => {
 
   return response.json();
 }
+
+export const createUser = async (email: string, password: string, username: string, image?: string) => {
+  const response = await fetch(
+    `${BASE_API_URL}/users`,
+    {
+      method: 'POST',
+      
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({ email, password, username, image: image || undefined })
+    }
+  )
+
+  return response.json();
+} 
