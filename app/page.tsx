@@ -1,56 +1,60 @@
-import { Link } from "@heroui/link";
-import { Snippet } from "@heroui/snippet";
-import { Code } from "@heroui/code";
-import { button as buttonStyles } from "@heroui/theme";
+'use client'
 
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
+import { login } from "@/services/api";
+import { Button } from "@heroui/button";
+import { Input } from "@heroui/input";
+import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
 
 export default function Home() {
+  const [{ email, password }, setFormValues] = useState({ email: '', password: '' });
+  const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter();
+
+  const onLoginClick = useCallback(async () => {
+    setErrorMessage('');
+    const response: { message?: string, token?: string } = await login(email, password);
+    if (response.message) {
+      setErrorMessage(response.message);
+      return;
+    }
+    localStorage.setItem("token", response.token!);
+    setFormValues({ email: '', password: '' });
+    router.push('/profile');
+  }, [email, password]);
+
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block max-w-xl text-center justify-center">
-        <span className={title()}>Make&nbsp;</span>
-        <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
-        <br />
-        <span className={title()}>
-          websites regardless of your design experience.
-        </span>
-        <div className={subtitle({ class: "mt-4" })}>
-          Beautiful, fast and modern React UI library.
+    <section className="flex items-center justify-center h-[100vh]">
+      <form className="flex flex-col items-center justify-between gap-16 border border-black rounded p-16 w-[25%]">
+        <div className="flex flex-col items-center gap-4 w-full">
+          <Input
+            label="Email"
+            variant="bordered"
+            type="text"
+            value={email}
+            onValueChange={(value) => { setFormValues({ password, email: value }) }}
+            classNames={
+              {
+                inputWrapper: 'border-default-400 data-[hover=true]:border-default-600'
+              }
+            }
+          />
+          <Input
+            label="Password"
+            variant="bordered"
+            type="password"
+            value={password}
+            onValueChange={(value) => { setFormValues({ password: value, email }) }}
+            classNames={
+              {
+                inputWrapper: 'border-default-400 data-[hover=true]:border-default-600'
+              }
+            }
+          />
+          <p className="h-[24px]">{errorMessage}</p>
         </div>
-      </div>
-
-      <div className="flex gap-3">
-        <Link
-          isExternal
-          className={buttonStyles({
-            color: "primary",
-            radius: "full",
-            variant: "shadow",
-          })}
-          href={siteConfig.links.docs}
-        >
-          Documentation
-        </Link>
-        <Link
-          isExternal
-          className={buttonStyles({ variant: "bordered", radius: "full" })}
-          href={siteConfig.links.github}
-        >
-          <GithubIcon size={20} />
-          GitHub
-        </Link>
-      </div>
-
-      <div className="mt-8">
-        <Snippet hideCopyButton hideSymbol variant="bordered">
-          <span>
-            Get started by editing <Code color="primary">app/page.tsx</Code>
-          </span>
-        </Snippet>
-      </div>
+        <Button onPress={ onLoginClick } type="button" className="w-full" color="primary">Login</Button>
+      </form>
     </section>
   );
 }

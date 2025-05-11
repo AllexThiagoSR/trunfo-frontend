@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  transpilePackages: ["@heroui/dom-animation"],
+};
 
 module.exports = nextConfig;
