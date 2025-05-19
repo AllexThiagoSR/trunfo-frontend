@@ -1,16 +1,26 @@
 'use client'
-
 import { login } from "@/services/api";
 import { Button } from "@heroui/button";
 import { Input } from "@heroui/input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function Home() {
   const [{ email, password }, setFormValues] = useState({ email: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
+
+  useEffect(
+    () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        router.push('/profile/self');
+        return;
+      }
+    },
+    []
+  )
 
   const onLoginClick = useCallback(async () => {
     setErrorMessage('');
@@ -21,12 +31,12 @@ export default function Home() {
     }
     localStorage.setItem("token", response.token!);
     setFormValues({ email: '', password: '' });
-    router.push('/profile');
+    router.push('/profile/self');
   }, [email, password]);
 
   return (
-    <section className="flex items-center justify-center h-[100vh]">
-      <form className="flex flex-col items-center justify-between gap-16 border border-black rounded p-16 w-[25%]">
+    <main className="w-full flex items-center justify-center h-[100vh] w-full">
+      <form className="flex flex-col items-center justify-between gap-16 border border-black rounded p-16 w-[25%] min-w-[400px]">
         <div className="flex flex-col items-center gap-4 w-full">
           <Input
             label="Email"
@@ -56,9 +66,9 @@ export default function Home() {
         </div>
         <div className="flex flex-col items-center w-full gap-2">
           <Button isDisabled={!email || !password} onPress={ onLoginClick } type="button" className="w-full" color="primary">Login</Button>
-          <p>Don't have an accoun? <Link href={'/sign-up'} className="underline text-sky-600">Sign Up</Link></p>
+          <p>Don't have an account? <Link href={'/sign-up'} className="underline text-sky-600">Sign Up</Link></p>
         </div>
       </form>
-    </section>
+    </main>
   );
 }

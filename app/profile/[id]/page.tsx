@@ -6,8 +6,8 @@ export default function Profile() {
   const params = useParams();
 
   return (
-    <section>
+    <main className="w-full h-[100vh]">
       Perfil { params.id }
-    </section>
+    </main>
   )
 }

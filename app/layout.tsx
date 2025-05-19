@@ -38,9 +38,7 @@ export default function RootLayout({
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
-          <main className="w-full h-[100vh]">
-            {children}
-          </main>
+          {children}
         </Providers>
       </body>
     </html>

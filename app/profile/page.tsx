@@ -10,8 +10,8 @@ export default function Profile() {
     if (!token) router.push('/');
   })
   return (
-    <section>
-      Perfil
-    </section>
+    <main className="w-full h-[100vh]">
+      Perfis
+    </main>
   )
 }

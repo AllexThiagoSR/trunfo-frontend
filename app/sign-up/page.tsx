@@ -52,7 +52,7 @@ export default function SignUp() {
     }, [formValues]);
 
   return(
-    <section className="flex items-center justify-center h-[100vh]">
+    <main className="w-full flex items-center justify-center h-[100vh]">
       <form className="flex flex-col items-center justify-between gap-16 border border-black rounded p-16 w-[25%]">
         <div className="flex flex-col items-center gap-4 w-full">
           <Input
@@ -139,9 +139,9 @@ export default function SignUp() {
           >
             Sign Up
           </Button>
-          <p>Already have an accoun? <Link href={'/'} className="underline text-sky-600">Log In</Link></p>
+          <p>Already have an account? <Link href={'/'} className="underline text-sky-600">Log In</Link></p>
         </div>
       </form>
-    </section>
+    </main>
   )
 }

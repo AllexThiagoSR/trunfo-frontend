@@ -26,7 +26,6 @@ export const createUser = async (email: string, password: string, username: stri
     `${BASE_API_URL}/users`,
     {
       method: 'POST',
-      
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
@@ -37,3 +36,21 @@ export const createUser = async (email: string, password: string, username: stri
 
   return response.json();
 } 
+
+export const getLoggedUser = async (token: string) => {
+  const response = await fetch(
+    `${BASE_API_URL}/users/logged`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+    }
+  );
+
+  if (response.status === 401) throw new Error((await response.json()).message);
+  
+  return response.json();
+}
